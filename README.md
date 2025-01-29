@@ -86,15 +86,15 @@ Explore the project repository: [ConnectX GitHub Repository](https://github.com/
 
 ## 🚀 Get Started
 1. 📥 Clone the repository:
-   ```bash
+   ``` bash
    git clone https://github.com/Rwadsariya/ConnectX_4p02.git
    ```
 2. 📦 Install dependencies:
-   ```bash
+   ``` bash
    npm install
    ```
 3. 🖥️ Start the development server:
-   ```bash
+   ``` bash
    npm run dev
    ```
 
