@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  clerkId   String   @unique 
+  email     String   @unique
+  firstname String?  @unique
+  lastname  String?  @unique
+  createdAt DateTime @default(now())
+
+  Subscription Subscription?
+  integrations Integrations[]
+  automations Automations[]
+}
+
+model Subscription {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  User User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @unique @db.Uuid
+  plan SUBSCRIPTION_PLAN @default(FREE)
+  updatedAt DateTime @default(now())
+  customerId String? @unique 
+}
+
+model Automations {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String @default("Untitled")
+  createdAt DateTime @default(now())
+  active Boolean @default(false)
+  trigger Trigger[]
+  listerner Listener?
+  posts Post[]
+  dms Dms[]
+
+  User User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @db.Uuid
+  keywords Keyword[]
+}
+model Dms {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Automation Automations? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String? @db.Uuid
+  createdAt DateTime @default(now())
+  senderId String?
+  receiver String?
+  message String?
+}
+model Keyword {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  word String
+  Automation Automations? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String? @db.Uuid
+
+  @@unique([word, automationId]) // this constraint ensures that each word is unique for each automation
+}
+
+model Post {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  postId String
+  caption String
+  media String
+  mediaType MEDIATYPE @default(IMAGE)
+  Automation Automations? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String? @db.Uuid
+}
+enum MEDIATYPE {
+  IMAGE
+  COROSEL_ALBUM
+  VIDEO
+}
+
+model Integrations {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name INTEGRATION @default(INSTAGRAM)
+  createdAt DateTime @default(now())
+  User User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @db.Uuid
+  token String @unique
+  expiresAt DateTime?
+  instagramId String? @unique
+}
+
+enum INTEGRATION {
+  INSTAGRAM
+} // for futher integrations with other social media platforms
+
+enum SUBSCRIPTION_PLAN {
+  FREE
+  PRO
+}
+
+model Trigger {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type String
+  Automation Automations? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String? @db.Uuid
+}
+
+model Listener {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Automation Automations @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String @db.Uuid @unique
+  listener LISTENERS @default(MESSAGE)
+  prompt String
+  commentReply String?
+  dmCount Int @default(0)
+  commentCount Int @default(0)
+}
+enum LISTENERS {
+  MESSAGE
+  SMARTAI
+}
+
