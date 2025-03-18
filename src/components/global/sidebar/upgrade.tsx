@@ -1,3 +1,4 @@
+import React from 'react'
 import PaymentButton from '../payment-button'
 
 type Props = {}
