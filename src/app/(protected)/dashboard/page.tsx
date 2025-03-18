@@ -1,16 +1,18 @@
+import { onBoardUser } from "@/actions/users";
+import { redirect } from "next/navigation";
 
 interface Props {
 
 }
 
 const Page = async ({}: Props) => {
-
-    // server Action Onboard the user
-
-    // 200 || 201  rediect to dashboard
-  return (
-    <div className="flex justify-center items-center">Dashboard</div>
-  );
+  // Server Action Onboard the user
+  const user = await onBoardUser()
+  if (user.status === 200 || user.status === 201) {
+    return redirect(`dashboard/${user.data?.firstname}${user.data?.lastname}`)
+  }
+  
+  return redirect('/sign-in')
 };
 
 export default Page;
