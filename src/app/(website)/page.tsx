@@ -4,6 +4,12 @@ import { CheckCircle } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import Footer from "@/components/global/footer"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { CheckCircle } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import Footer from "@/components/global/footer"
 
 export default function Home() {
   const plans = [
@@ -11,18 +17,33 @@ export default function Home() {
       name: "Free Plan",
       description: "Perfect for getting started",
       price: "$0",
+      name: "Free Plan",
+      description: "Perfect for getting started",
+      price: "$0",
       features: [
         "Boost engagement with target responses",
         "Automate comment replies to enhance audience interaction",
         "Turn followers into customers with targeted messaging",
+        "Boost engagement with target responses",
+        "Automate comment replies to enhance audience interaction",
+        "Turn followers into customers with targeted messaging",
       ],
+      cta: "Get Started",
       cta: "Get Started",
     },
     {
       name: "Smart AI Plan",
       description: "Advanced features for power users",
       price: "$99",
+      name: "Smart AI Plan",
+      description: "Advanced features for power users",
+      price: "$99",
       features: [
+        "All features from Free Plan",
+        "AI-powered response generation",
+        "Advanced analytics and insights",
+        "Priority customer support",
+        "Custom branding options",
         "All features from Free Plan",
         "AI-powered response generation",
         "Advanced analytics and insights",
@@ -56,6 +77,7 @@ export default function Home() {
         "Since using ConnectX, I've been able to maintain meaningful connections with my audience even while traveling. It's been a game-changer for my brand.",
     },
   ]
+
 
   return (
     <>
@@ -165,3 +187,4 @@ export default function Home() {
     </>
   )
 }
+
