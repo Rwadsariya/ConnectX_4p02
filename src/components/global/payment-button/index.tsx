@@ -14,7 +14,7 @@ const PaymentButton = (props: Props) => {
       className="bg-gradient-to-br
      text-white 
      rounded-full 
-    from-[#6d60a3] 
+    from-[#6f5db8] 
     via-[#9434E6] 
     font-bold 
     to-[#CC3BD4]"
