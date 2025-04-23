@@ -53,8 +53,8 @@
 - 🔄 Future scalability to microservices architecture.
 
 ## 👥 Team Members
-- 👨‍💻 **Mann Patel**: Scrum Master & Developer
-- 👨‍💻 **Romeen Wadsariya**: Developer
+- 👨‍💻 **Mann Patel**: Developer
+- 👨‍💻 **Romeen Wadsariya**: Developer & Scrum Master
 - 👨‍💻 **Nitish Bhardwaj**: Developer
 - 👨‍💻 **Basil Syed**: Developer & Product Owner
 - 👨‍💻 **Kashish Patel**: Developer
