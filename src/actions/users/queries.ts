@@ -8,7 +8,7 @@ export const findUser = async (clerkId: string) => {
       clerkId,
     },
     include: {
-      Subscription: true,
+      subscription: true,
       integrations: {
         select: {
           id: true,
@@ -33,7 +33,7 @@ export const createUser = async (
       firstname,
       lastname,
       email,
-      Subscription: {
+      subscription: {
         create: {},
       },
     },
@@ -53,7 +53,7 @@ export const updateSubscription = async (
       clerkId,
     },
     data: {
-      Subscription: {
+      subscription: {
         update: {
           data: {
             ...props,
