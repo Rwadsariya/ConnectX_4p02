@@ -1,3 +1,4 @@
+
 import { currentUser } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
@@ -29,4 +30,5 @@ export async function GET(){
             })
         }
     return NextResponse.json({staus:400})
+
 }

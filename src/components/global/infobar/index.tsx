@@ -15,7 +15,7 @@ import { LogoSmall } from '@/svgs/logo-small'
 import CreateAutomation from '../create-automation'
 import Search from './search'
 import { Notifications } from './notifications'
-// import MainBreadCrumb from '../bread-crumbs/main-bread-crumb'
+import MainBreadCrumb from '../bread-crumbs/main-bread-crumb'
 
 type Props = {
   slug: string
@@ -73,10 +73,10 @@ const InfoBar = ({ slug }: Props) => {
           <CreateAutomation />
           <Notifications />
         </div>
-        {/* <MainBreadCrumb
+        <MainBreadCrumb
           page={page === slug ? 'Home' : page}
           slug={slug}
-        /> */}
+        />
       </div>
     )
   )

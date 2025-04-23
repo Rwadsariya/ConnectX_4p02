@@ -11,7 +11,7 @@ export const createAutomation = async (clerkId: string, id?: string) => {
     data: {
       automations: {
         create: {
-          // ...(id && { id }),
+          ...(id && { id }),
         },
       },
     },
@@ -30,7 +30,7 @@ export const getAutomations = async (clerkId: string) => {
         },
         include: {
           keywords: true,
-          listerner: true,
+          listener: true,
         },
       },
     },
@@ -38,7 +38,7 @@ export const getAutomations = async (clerkId: string) => {
 }
 
 export const findAutomation = async (id: string) => {
-  return await client.automations.findUnique({
+  return await client.automation.findUnique({
     where: {
       id,
     },
@@ -46,10 +46,10 @@ export const findAutomation = async (id: string) => {
       keywords: true,
       trigger: true,
       posts: true,
-      listerner: true,
+      listener: true,
       User: {
         select: {
-          Subscription: true,
+          subscription: true,
           integrations: true,
         },
       },
@@ -64,7 +64,7 @@ export const updateAutomation = async (
     active?: boolean
   }
 ) => {
-  return await client.automations.update({
+  return await client.automation.update({
     where: { id },
     data: {
       name: update.name,
@@ -79,12 +79,12 @@ export const addListener = async (
   prompt: string,
   reply?: string
 ) => {
-  return await client.automations.update({
+  return await client.automation.update({
     where: {
       id: automationId,
     },
     data: {
-      listerner: {
+      listener: {
         create: {
           listener,
           prompt,
@@ -97,7 +97,7 @@ export const addListener = async (
 
 export const addTrigger = async (automationId: string, trigger: string[]) => {
   if (trigger.length === 2) {
-    return await client.automations.update({
+    return await client.automation.update({
       where: { id: automationId },
       data: {
         trigger: {
@@ -108,7 +108,7 @@ export const addTrigger = async (automationId: string, trigger: string[]) => {
       },
     })
   }
-  return await client.automations.update({
+  return await client.automation.update({
     where: {
       id: automationId,
     },
@@ -123,7 +123,7 @@ export const addTrigger = async (automationId: string, trigger: string[]) => {
 }
 
 export const addKeyWord = async (automationId: string, keyword: string) => {
-  return client.automations.update({
+  return client.automation.update({
     where: {
       id: automationId,
     },
@@ -146,13 +146,13 @@ export const deleteKeywordQuery = async (id: string) => {
 export const addPost = async (
   autmationId: string,
   posts: {
-    postId: string
+    postid: string
     caption?: string
     media: string
     mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
   }[]
 ) => {
-  return await client.automations.update({
+  return await client.automation.update({
     where: {
       id: autmationId,
     },

@@ -1,4 +1,3 @@
-
 type SpinnerProps = {
   color?: string
 }

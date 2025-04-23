@@ -1,4 +1,5 @@
-import { onSubscribe } from '@/actions/users'
+
+import { onSubscribe } from '@/actions/user'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
